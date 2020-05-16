@@ -2,6 +2,8 @@
 
 Based on [Fasthttp Fastws](https://github.com/fasthttp/fastws) for [Fiber](https://github.com/gofiber/fiber)
 
+This is a proof of concept and not ready for production!
+
 ### Install
 
 ```
@@ -27,7 +29,8 @@ func main() {
 
 	app.Get("/", websocket.Upgrade(handler))
 
-	app.Listen(3000)
+  app.Listen(3000)
+  // Access the websocket server: ws://localhost:3000/ws
 }
 
 // Websocket handler
@@ -51,10 +54,5 @@ func handler(conn *websocket.Conn) {
 		}
 	}
 	fmt.Printf("Closed connection\n")
-}
-
-
-  app.Listen(3000)
-  // Access the websocket server: ws://localhost:3000/ws
 }
 ```
