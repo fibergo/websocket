@@ -11,15 +11,15 @@ import (
 
 // Config ...
 type Config struct {
-	// // Protocols are the supported protocols.
-	// Protocols []string
+	// Protocols are the supported protocols.
+	Protocols []string
 
-	// // Origin is used to limit the clients coming from the defined origin
-	// Origin string
+	// Origin is used to limit the clients coming from the defined origin
+	Origin string
 
-	// // Compress defines whether using compression or not.
-	// // TODO
-	// Compress bool
+	// Compress defines whether using compression or not.
+	// TODO
+	Compress bool
 }
 
 func Upgrade(handler func(*Conn), config ...Config) func(*fiber.Ctx) {
@@ -28,12 +28,12 @@ func Upgrade(handler func(*Conn), config ...Config) func(*fiber.Ctx) {
 	if len(config) > 0 {
 		cfg = config[0]
 	}
-	// if len(cfg.Protocols) == 0 {
-	// 	cfg.Protocols = []string{""}
-	// }
-	// if Protocols == "" {
-	// 	cfg.Origin = ""
-	// }
+	if len(cfg.Protocols) == 0 {
+		cfg.Protocols = []string{""}
+	}
+	if cfg.Origin == "" {
+		cfg.Origin = ""
+	}
 	upgrader := &fastws.Upgrader{
 		Handler: func(fconn *fastws.Conn) {
 			conn := acquireConn(fconn)
